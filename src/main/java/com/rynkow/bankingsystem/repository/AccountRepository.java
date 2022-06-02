@@ -3,7 +3,6 @@ package com.rynkow.bankingsystem.repository;
 import com.rynkow.bankingsystem.Account;
 import com.rynkow.bankingsystem.Currency;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -33,14 +32,19 @@ public class AccountRepository {
         return accounts.stream().filter(account -> account.getCurrency().equals(currency)).toList();
     }
 
-    public Optional<Account> getAccountByUserIdAndCurrency(String userId, Currency currency){
+    public Optional<Account> getAccountByUserIdAndCurrency(String userId, Currency currency) {
         return accounts.stream().filter(account -> account.getUserId().equals(userId) && account.getCurrency().equals(currency)).findAny();
     }
 
-    public void save(Account account) throws IllegalArgumentException{
+    public void save(Account account) throws IllegalArgumentException {
         if (getAccountByUserIdAndCurrency(account.getUserId(), account.getCurrency()).isPresent())
             throw new IllegalArgumentException("Duplicated account");
 
         accounts.add(account);
+    }
+
+    // for testing
+    public void clear() {
+        accounts.clear();
     }
 }
