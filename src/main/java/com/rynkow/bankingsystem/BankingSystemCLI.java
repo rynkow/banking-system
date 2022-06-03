@@ -83,7 +83,7 @@ public class BankingSystemCLI {
                             System.out.println("enter command: (base currency)PLN|EUR|USD (target currency)PLN|EUR|USD amount");
                             System.out.print(activeUser + "> ");
                             String[] exchangeCommand = br.readLine().split("\\s+");
-                            if (exchangeCommand.length != 3) throw new RuntimeException("invalid send command");
+                            if (exchangeCommand.length != 3) throw new RuntimeException("invalid exchange command");
                             bankingSystem.exchangeCurrency(Currency.valueOf(exchangeCommand[0]), Currency.valueOf(exchangeCommand[1]), new BigDecimal(exchangeCommand[2]), activeUser);
                             break;
                         default:
