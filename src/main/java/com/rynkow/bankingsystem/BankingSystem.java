@@ -6,9 +6,7 @@ import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class BankingSystem {
     private final AccountRepository accountRepository;
@@ -117,5 +115,17 @@ public class BankingSystem {
             Account newAccount = new Account(userId, currency);
             accountRepository.save(newAccount);
         }
+    }
+
+    public Map<Currency, BigDecimal> getAccountBalance(String userId) {
+        List<Account> accounts = accountRepository.getAccountsByUserId(userId);
+        if (accounts.size() == 0)
+            throw new RuntimeException("user account not found");
+
+        Map<Currency, BigDecimal> balances = new HashMap<>();
+        for (Account account : accounts)
+            balances.put(account.getCurrency(), account.getBalance());
+
+        return balances;
     }
 }
