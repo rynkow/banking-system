@@ -18,4 +18,9 @@ public class Transaction {
         this.transactionDate = new Date();
         this.currency = currency;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%-16s%-16s%-25s%-25s%s", "type=" + type, "currency=" + currency, "initialBalance=" + initialBalance, "balanceChange=" + balanceChange, "transactionDate=" + transactionDate);
+    }
 }
