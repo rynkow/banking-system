@@ -1,7 +1,7 @@
 package com.rynkow.bankingsystem.repository;
 
-import com.rynkow.bankingsystem.Account;
-import com.rynkow.bankingsystem.Currency;
+import com.rynkow.bankingsystem.model.Account;
+import com.rynkow.bankingsystem.model.Currency;
 
 import java.util.LinkedList;
 import java.util.List;

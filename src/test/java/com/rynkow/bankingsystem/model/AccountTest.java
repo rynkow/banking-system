@@ -1,4 +1,4 @@
-package com.rynkow.bankingsystem;
+package com.rynkow.bankingsystem.model;
 
 import org.junit.jupiter.api.Test;
 

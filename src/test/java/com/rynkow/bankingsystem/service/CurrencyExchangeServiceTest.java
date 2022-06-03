@@ -1,6 +1,6 @@
 package com.rynkow.bankingsystem.service;
 
-import com.rynkow.bankingsystem.Currency;
+import com.rynkow.bankingsystem.model.Currency;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
 

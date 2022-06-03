@@ -1,5 +1,7 @@
 package com.rynkow.bankingsystem;
 
+import com.rynkow.bankingsystem.model.Currency;
+import com.rynkow.bankingsystem.model.Transaction;
 import org.json.simple.parser.ParseException;
 
 import java.io.BufferedReader;

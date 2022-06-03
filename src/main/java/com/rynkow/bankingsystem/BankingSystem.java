@@ -1,5 +1,9 @@
 package com.rynkow.bankingsystem;
 
+import com.rynkow.bankingsystem.model.Account;
+import com.rynkow.bankingsystem.model.Currency;
+import com.rynkow.bankingsystem.model.Transaction;
+import com.rynkow.bankingsystem.model.TransactionType;
 import com.rynkow.bankingsystem.repository.AccountRepository;
 import com.rynkow.bankingsystem.service.CurrencyExchangeService;
 import org.json.simple.parser.ParseException;
@@ -17,7 +21,7 @@ public class BankingSystem {
         this.exchangeService = CurrencyExchangeService.getInstance();
     }
 
-    public void sendFunds(Currency currency, BigDecimal amount, String senderId, String receiverId) throws RuntimeException {
+    public void sendFunds(com.rynkow.bankingsystem.model.Currency currency, BigDecimal amount, String senderId, String receiverId) throws RuntimeException {
         Account senderAccount = accountRepository.getAccountByUserIdAndCurrency(senderId, currency)
                 .orElseThrow(() -> new RuntimeException("sender account not found"));
         Account receiverAccount = accountRepository.getAccountByUserIdAndCurrency(receiverId, currency)
@@ -33,7 +37,7 @@ public class BankingSystem {
         receiverAccount.addTransactionToHistory(receiveTransaction);
     }
 
-    public void depositFunds(Currency currency, BigDecimal amount, String userId) throws RuntimeException {
+    public void depositFunds(com.rynkow.bankingsystem.model.Currency currency, BigDecimal amount, String userId) throws RuntimeException {
         Account account = accountRepository.getAccountByUserIdAndCurrency(userId, currency)
                 .orElseThrow(() -> new RuntimeException("account not found"));
 
@@ -42,7 +46,7 @@ public class BankingSystem {
         account.addTransactionToHistory(depositTransaction);
     }
 
-    public void withdrawFunds(Currency currency, BigDecimal amount, String userId) throws RuntimeException {
+    public void withdrawFunds(com.rynkow.bankingsystem.model.Currency currency, BigDecimal amount, String userId) throws RuntimeException {
         Account account = accountRepository.getAccountByUserIdAndCurrency(userId, currency)
                 .orElseThrow(() -> new RuntimeException("account not found"));
 
@@ -51,7 +55,7 @@ public class BankingSystem {
         account.addTransactionToHistory(withdrawTransaction);
     }
 
-    public void exchangeCurrency(Currency baseCurrency, Currency targetCurrency, BigDecimal amount, String userId) throws RuntimeException {
+    public void exchangeCurrency(com.rynkow.bankingsystem.model.Currency baseCurrency, com.rynkow.bankingsystem.model.Currency targetCurrency, BigDecimal amount, String userId) throws RuntimeException {
         Account baseCurrencyAccount = accountRepository.getAccountByUserIdAndCurrency(userId, baseCurrency)
                 .orElseThrow(() -> new RuntimeException("base currency account not found"));
         Account targetCurrencyAccount = accountRepository.getAccountByUserIdAndCurrency(userId, targetCurrency)
@@ -69,7 +73,7 @@ public class BankingSystem {
         targetCurrencyAccount.addTransactionToHistory(targetCurrencyExchangeTransaction);
     }
 
-    public List<Transaction> getAccountHistory(String userId, Currency currency, Date startDate, Date endDate, TransactionType transactionType) throws RuntimeException {
+    public List<Transaction> getAccountHistory(String userId, com.rynkow.bankingsystem.model.Currency currency, Date startDate, Date endDate, TransactionType transactionType) throws RuntimeException {
         List<Transaction> transactions = new ArrayList<>();
 
         // get transaction history
@@ -111,13 +115,13 @@ public class BankingSystem {
         if (accountRepository.getAccountsByUserId(userId).size() > 0)
             throw new IllegalArgumentException("duplicated userId");
 
-        for (Currency currency : Currency.values()) {
+        for (com.rynkow.bankingsystem.model.Currency currency : com.rynkow.bankingsystem.model.Currency.values()) {
             Account newAccount = new Account(userId, currency);
             accountRepository.save(newAccount);
         }
     }
 
-    public Map<Currency, BigDecimal> getAccountBalance(String userId) {
+    public Map<com.rynkow.bankingsystem.model.Currency, BigDecimal> getAccountBalance(String userId) {
         List<Account> accounts = accountRepository.getAccountsByUserId(userId);
         if (accounts.size() == 0)
             throw new RuntimeException("user account not found");

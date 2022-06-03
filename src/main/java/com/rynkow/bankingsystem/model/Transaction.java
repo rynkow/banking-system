@@ -1,4 +1,4 @@
-package com.rynkow.bankingsystem;
+package com.rynkow.bankingsystem.model;
 
 import java.math.BigDecimal;
 import java.util.Date;

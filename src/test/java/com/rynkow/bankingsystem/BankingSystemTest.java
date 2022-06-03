@@ -1,5 +1,8 @@
 package com.rynkow.bankingsystem;
 
+import com.rynkow.bankingsystem.model.Currency;
+import com.rynkow.bankingsystem.model.Transaction;
+import com.rynkow.bankingsystem.model.TransactionType;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
