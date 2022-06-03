@@ -30,6 +30,13 @@ public class CurrencyExchangeService {
         }
     }
 
+    public static CurrencyExchangeService getInstance() throws IOException, ParseException {
+        if (instance == null)
+            instance = new CurrencyExchangeService();
+
+        return instance;
+    }
+
     private void readCurrencyExchangeRates(Currency baseCurrency, JSONObject jsonExchangeRates) {
         JSONObject currencyExchangeRates = (JSONObject) jsonExchangeRates.get(baseCurrency.name());
         for (Currency targetCurrency : Currency.values()) {
@@ -37,13 +44,6 @@ public class CurrencyExchangeService {
             BigDecimal exchangeRate = BigDecimal.valueOf((double) currencyExchangeRates.get(targetCurrency.name()));
             exchangeRates.get(baseCurrency).put(targetCurrency, exchangeRate);
         }
-    }
-
-    public static CurrencyExchangeService getInstance() throws IOException, ParseException {
-        if (instance == null)
-            instance = new CurrencyExchangeService();
-
-        return instance;
     }
 
     public BigDecimal exchange(Currency baseCurrency, Currency targetCurrency, BigDecimal amount) {

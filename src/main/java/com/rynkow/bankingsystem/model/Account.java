@@ -6,9 +6,9 @@ import java.util.List;
 
 public class Account {
     private final String userId;
-    private BigDecimal balance;
     private final Currency currency;
     private final List<Transaction> transactionHistory;
+    private BigDecimal balance;
 
     public Account(String userId, Currency currency) {
         this.userId = userId;
@@ -17,14 +17,14 @@ public class Account {
         this.transactionHistory = new LinkedList<>();
     }
 
-    public void deposit(BigDecimal amount) throws IllegalArgumentException{
-        if (amount.signum()< 1)
+    public void deposit(BigDecimal amount) throws IllegalArgumentException {
+        if (amount.signum() < 1)
             throw new IllegalArgumentException("deposit amount not positive");
 
         balance = balance.add(amount);
     }
 
-    public void withdraw(BigDecimal amount) throws IllegalArgumentException, IllegalStateException{
+    public void withdraw(BigDecimal amount) throws IllegalArgumentException, IllegalStateException {
         if (amount.signum() < 1)
             throw new IllegalArgumentException("withdraw amount not positive");
         if (balance.compareTo(amount) < 0)
@@ -45,7 +45,7 @@ public class Account {
         return userId;
     }
 
-    public void addTransactionToHistory(Transaction transaction){
+    public void addTransactionToHistory(Transaction transaction) {
         transactionHistory.add(transaction);
     }
 

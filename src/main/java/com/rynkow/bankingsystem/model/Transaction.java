@@ -5,11 +5,11 @@ import java.util.Date;
 
 public class Transaction {
     public final TransactionType type;
+    public final Currency currency;
     public final BigDecimal initialBalance;
     public final BigDecimal balanceChange;
     public final Date transactionDate;
 
-    public final Currency currency;
 
     public Transaction(TransactionType type, Currency currency, BigDecimal initialBalance, BigDecimal balanceChange) {
         this.type = type;
