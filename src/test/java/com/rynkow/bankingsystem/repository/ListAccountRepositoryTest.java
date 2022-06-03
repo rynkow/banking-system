@@ -10,18 +10,18 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AccountRepositoryTest {
+public class ListAccountRepositoryTest {
 
     @BeforeEach
     void ClearRepository() {
-        AccountRepository.getInstance().clear();
+        ListAccountRepository.getInstance().clear();
     }
 
     @Test
     void ShouldBeSingleton() {
         // when getInstance method is called multiple times
-        AccountRepository instance1 = AccountRepository.getInstance();
-        AccountRepository instance2 = AccountRepository.getInstance();
+        ListAccountRepository instance1 = ListAccountRepository.getInstance();
+        ListAccountRepository instance2 = ListAccountRepository.getInstance();
         // then the same instance is returned
         assertSame(instance1, instance2);
     }
@@ -29,7 +29,7 @@ public class AccountRepositoryTest {
     @Test
     void newAccountsShouldBeSavedCorrectly() {
         // given account repository and a few accounts
-        AccountRepository repository = AccountRepository.getInstance();
+        ListAccountRepository repository = ListAccountRepository.getInstance();
         Account account1 = new Account("user1", Currency.PLN);
         Account account2 = new Account("user2", Currency.USD);
         Account account3 = new Account("user3", Currency.EUR);
@@ -49,7 +49,7 @@ public class AccountRepositoryTest {
     @Test
     void ShouldNotSaveDuplicatedAccount() {
         // given account repository already containing an account
-        AccountRepository repository = AccountRepository.getInstance();
+        ListAccountRepository repository = ListAccountRepository.getInstance();
         Account account = new Account("user1", Currency.PLN);
         repository.save(account);
 
@@ -61,7 +61,7 @@ public class AccountRepositoryTest {
     @Test
     void ShouldFilterAccountsCorrectly() {
         // given repository with different accounts
-        AccountRepository repository = AccountRepository.getInstance();
+        ListAccountRepository repository = ListAccountRepository.getInstance();
         repository.save(new Account("user1", Currency.PLN));
         repository.save(new Account("user1", Currency.USD));
         repository.save(new Account("user1", Currency.EUR));

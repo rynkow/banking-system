@@ -5,6 +5,7 @@ import com.rynkow.bankingsystem.model.Currency;
 import com.rynkow.bankingsystem.model.Transaction;
 import com.rynkow.bankingsystem.model.TransactionType;
 import com.rynkow.bankingsystem.repository.AccountRepository;
+import com.rynkow.bankingsystem.repository.ListAccountRepository;
 import com.rynkow.bankingsystem.service.CurrencyExchangeService;
 import org.json.simple.parser.ParseException;
 
@@ -17,7 +18,7 @@ public class BankingSystem {
     private final CurrencyExchangeService exchangeService;
 
     public BankingSystem() throws IOException, ParseException {
-        this.accountRepository = AccountRepository.getInstance();
+        this.accountRepository = ListAccountRepository.getInstance();
         this.exchangeService = CurrencyExchangeService.getInstance();
     }
 
