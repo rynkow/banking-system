@@ -87,8 +87,8 @@ public class AccountTest {
     void ShouldAddTransactionsToHistory() {
         // given an account and transactions
         Account account = new Account("userID", Currency.PLN);
-        Transaction transaction1 = new Transaction(TransactionType.DEPOSIT, BigDecimal.valueOf(100), BigDecimal.valueOf(10));
-        Transaction transaction2 = new Transaction(TransactionType.RECEIVE, BigDecimal.valueOf(1234), BigDecimal.valueOf(1));
+        Transaction transaction1 = new Transaction(TransactionType.DEPOSIT, Currency.PLN, BigDecimal.valueOf(100), BigDecimal.valueOf(10));
+        Transaction transaction2 = new Transaction(TransactionType.RECEIVE, Currency.PLN, BigDecimal.valueOf(1234), BigDecimal.valueOf(1));
 
         // when transactions are added to history
         account.addTransactionToHistory(transaction1);

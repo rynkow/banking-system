@@ -23,8 +23,8 @@ public class BankingSystem {
         Account receiverAccount = accountRepository.getAccountByUserIdAndCurrency(receiverId, currency)
                 .orElseThrow(() -> new RuntimeException("receiver account not found"));
 
-        Transaction sendTransaction = new Transaction(TransactionType.SEND, senderAccount.getBalance(), amount.negate());
-        Transaction receiveTransaction = new Transaction(TransactionType.RECEIVE, receiverAccount.getBalance(), amount);
+        Transaction sendTransaction = new Transaction(TransactionType.SEND, currency, senderAccount.getBalance(), amount.negate());
+        Transaction receiveTransaction = new Transaction(TransactionType.RECEIVE, currency, receiverAccount.getBalance(), amount);
 
         senderAccount.withdraw(amount);
         receiverAccount.deposit(amount);
@@ -37,7 +37,7 @@ public class BankingSystem {
         Account account = accountRepository.getAccountByUserIdAndCurrency(userId, currency)
                 .orElseThrow(() -> new RuntimeException("account not found"));
 
-        Transaction depositTransaction = new Transaction(TransactionType.DEPOSIT, account.getBalance(), amount);
+        Transaction depositTransaction = new Transaction(TransactionType.DEPOSIT, currency, account.getBalance(), amount);
         account.deposit(amount);
         account.addTransactionToHistory(depositTransaction);
     }
@@ -46,7 +46,7 @@ public class BankingSystem {
         Account account = accountRepository.getAccountByUserIdAndCurrency(userId, currency)
                 .orElseThrow(() -> new RuntimeException("account not found"));
 
-        Transaction withdrawTransaction = new Transaction(TransactionType.WITHDRAW, account.getBalance(), amount.negate());
+        Transaction withdrawTransaction = new Transaction(TransactionType.WITHDRAW, currency, account.getBalance(), amount.negate());
         account.withdraw(amount);
         account.addTransactionToHistory(withdrawTransaction);
     }
@@ -59,8 +59,8 @@ public class BankingSystem {
 
         BigDecimal receivedAmount = exchangeService.exchange(baseCurrency, targetCurrency, amount);
 
-        Transaction baseCurrencyExchangeTransaction = new Transaction(TransactionType.EXCHANGE, baseCurrencyAccount.getBalance(), amount.negate());
-        Transaction targetCurrencyExchangeTransaction = new Transaction(TransactionType.EXCHANGE, targetCurrencyAccount.getBalance(), receivedAmount);
+        Transaction baseCurrencyExchangeTransaction = new Transaction(TransactionType.EXCHANGE, baseCurrency, baseCurrencyAccount.getBalance(), amount.negate());
+        Transaction targetCurrencyExchangeTransaction = new Transaction(TransactionType.EXCHANGE, targetCurrency, targetCurrencyAccount.getBalance(), receivedAmount);
 
         baseCurrencyAccount.withdraw(amount);
         targetCurrencyAccount.deposit(receivedAmount);

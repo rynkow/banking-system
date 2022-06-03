@@ -9,10 +9,13 @@ public class Transaction {
     public final BigDecimal balanceChange;
     public final Date transactionDate;
 
-    public Transaction(TransactionType type, BigDecimal initialBalance, BigDecimal balanceChange) {
+    public final Currency currency;
+
+    public Transaction(TransactionType type, Currency currency, BigDecimal initialBalance, BigDecimal balanceChange) {
         this.type = type;
         this.initialBalance = initialBalance;
         this.balanceChange = balanceChange;
         this.transactionDate = new Date();
+        this.currency = currency;
     }
 }
