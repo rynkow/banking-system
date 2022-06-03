@@ -27,7 +27,6 @@ public class ListAccountRepository implements AccountRepository {
     }
 
     @Override
-
     public List<Account> getAccountsByUserId(String userId) {
         return accounts.stream().filter(account -> account.getUserId().equals(userId)).toList();
     }
