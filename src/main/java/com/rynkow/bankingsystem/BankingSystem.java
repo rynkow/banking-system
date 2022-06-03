@@ -93,7 +93,7 @@ public class BankingSystem {
                 transactions.addAll(account.getTransactionHistory());
         }
 
-        // filter results
+        // filter and sort results
         transactions = transactions.stream().filter(transaction -> {
             // filter by date
             if (startDate != null && transaction.transactionDate.before(startDate))
