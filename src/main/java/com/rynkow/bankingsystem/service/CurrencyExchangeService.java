@@ -16,7 +16,7 @@ public class CurrencyExchangeService {
     private static CurrencyExchangeService instance;
     private final Map<Currency, Map<Currency, BigDecimal>> exchangeRates;
 
-    public CurrencyExchangeService() throws IOException, ParseException {
+    private CurrencyExchangeService() throws IOException, ParseException {
         exchangeRates = new HashMap<>();
         exchangeRates.put(Currency.PLN, new HashMap<>());
         exchangeRates.put(Currency.EUR, new HashMap<>());
