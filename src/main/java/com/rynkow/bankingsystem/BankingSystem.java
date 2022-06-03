@@ -7,6 +7,7 @@ import com.rynkow.bankingsystem.model.TransactionType;
 import com.rynkow.bankingsystem.repository.AccountRepository;
 import com.rynkow.bankingsystem.repository.ListAccountRepository;
 import com.rynkow.bankingsystem.service.CurrencyExchangeService;
+import com.rynkow.bankingsystem.service.JsonCurrencyExchangeService;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -19,7 +20,7 @@ public class BankingSystem {
 
     public BankingSystem() throws IOException, ParseException {
         this.accountRepository = ListAccountRepository.getInstance();
-        this.exchangeService = CurrencyExchangeService.getInstance();
+        this.exchangeService = JsonCurrencyExchangeService.getInstance();
     }
 
     public void sendFunds(Currency currency, BigDecimal amount, String senderId, String receiverId) throws RuntimeException {

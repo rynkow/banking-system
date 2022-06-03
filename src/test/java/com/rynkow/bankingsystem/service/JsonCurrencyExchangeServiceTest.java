@@ -9,20 +9,20 @@ import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CurrencyExchangeServiceTest {
+public class JsonCurrencyExchangeServiceTest {
 
     @Test
     void ShouldParseFileWithoutErrors() {
         // when getting service instance for the first time
         // then no exceptions are thrown
-        assertDoesNotThrow(CurrencyExchangeService::getInstance);
+        assertDoesNotThrow(JsonCurrencyExchangeService::getInstance);
     }
 
     @Test
     void ShouldBeSingleton() throws IOException, ParseException {
         // when getting an instance multiple times
-        CurrencyExchangeService instance1 = CurrencyExchangeService.getInstance();
-        CurrencyExchangeService instance2 = CurrencyExchangeService.getInstance();
+        JsonCurrencyExchangeService instance1 = JsonCurrencyExchangeService.getInstance();
+        JsonCurrencyExchangeService instance2 = JsonCurrencyExchangeService.getInstance();
 
         // then same instance is returned
         assertSame(instance1, instance2);
@@ -31,7 +31,7 @@ public class CurrencyExchangeServiceTest {
     @Test
     void ShouldNotExchangeCurrencyForItself() throws IOException, ParseException {
         // given currency exchange service
-        CurrencyExchangeService exchangeService = CurrencyExchangeService.getInstance();
+        JsonCurrencyExchangeService exchangeService = JsonCurrencyExchangeService.getInstance();
 
         // when trying to exchange currency for itself
         // then exception is thrown
@@ -41,7 +41,7 @@ public class CurrencyExchangeServiceTest {
     @Test
     void ShouldExchangeCurrenciesCorrectly() throws IOException, ParseException {
         // given currency exchange service
-        CurrencyExchangeService exchangeService = CurrencyExchangeService.getInstance();
+        JsonCurrencyExchangeService exchangeService = JsonCurrencyExchangeService.getInstance();
 
         // when exchanging currencies
         BigDecimal plnToEur = exchangeService.exchange(Currency.PLN, Currency.EUR, BigDecimal.valueOf(100));
