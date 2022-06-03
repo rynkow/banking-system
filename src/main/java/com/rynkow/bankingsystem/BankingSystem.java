@@ -102,7 +102,7 @@ public class BankingSystem {
 
             return true;
 
-        }).toList();
+        }).sorted(Comparator.comparing((Transaction t) -> t.transactionDate)).toList();
 
         return transactions;
     }
