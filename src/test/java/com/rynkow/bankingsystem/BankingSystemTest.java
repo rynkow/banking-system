@@ -3,6 +3,8 @@ package com.rynkow.bankingsystem;
 import com.rynkow.bankingsystem.model.Currency;
 import com.rynkow.bankingsystem.model.Transaction;
 import com.rynkow.bankingsystem.model.TransactionType;
+import com.rynkow.bankingsystem.repository.ListAccountRepository;
+import com.rynkow.bankingsystem.service.JsonCurrencyExchangeService;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -20,7 +22,7 @@ public class BankingSystemTest {
 
     @BeforeAll
     static void CreateBankingSystem() throws IOException, ParseException {
-        bankingSystem = new BankingSystem();
+        bankingSystem = new BankingSystem(ListAccountRepository.getInstance(), JsonCurrencyExchangeService.getInstance());
     }
 
     @Test

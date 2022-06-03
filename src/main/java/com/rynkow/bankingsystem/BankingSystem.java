@@ -5,12 +5,8 @@ import com.rynkow.bankingsystem.model.Currency;
 import com.rynkow.bankingsystem.model.Transaction;
 import com.rynkow.bankingsystem.model.TransactionType;
 import com.rynkow.bankingsystem.repository.AccountRepository;
-import com.rynkow.bankingsystem.repository.ListAccountRepository;
 import com.rynkow.bankingsystem.service.CurrencyExchangeService;
-import com.rynkow.bankingsystem.service.JsonCurrencyExchangeService;
-import org.json.simple.parser.ParseException;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -18,9 +14,9 @@ public class BankingSystem {
     private final AccountRepository accountRepository;
     private final CurrencyExchangeService exchangeService;
 
-    public BankingSystem() throws IOException, ParseException {
-        this.accountRepository = ListAccountRepository.getInstance();
-        this.exchangeService = JsonCurrencyExchangeService.getInstance();
+    public BankingSystem(AccountRepository accountRepository, CurrencyExchangeService exchangeService) {
+        this.accountRepository = accountRepository;
+        this.exchangeService = exchangeService;
     }
 
     public void sendFunds(Currency currency, BigDecimal amount, String senderId, String receiverId) throws RuntimeException {

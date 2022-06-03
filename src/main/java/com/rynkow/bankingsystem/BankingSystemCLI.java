@@ -2,6 +2,8 @@ package com.rynkow.bankingsystem;
 
 import com.rynkow.bankingsystem.model.Currency;
 import com.rynkow.bankingsystem.model.Transaction;
+import com.rynkow.bankingsystem.repository.ListAccountRepository;
+import com.rynkow.bankingsystem.service.JsonCurrencyExchangeService;
 import org.json.simple.parser.ParseException;
 
 import java.io.BufferedReader;
@@ -15,7 +17,7 @@ import java.util.Objects;
 public class BankingSystemCLI {
 
     public static void main(String[] args) throws IOException, ParseException {
-        BankingSystem bankingSystem = new BankingSystem();
+        BankingSystem bankingSystem = new BankingSystem(ListAccountRepository.getInstance(), JsonCurrencyExchangeService.getInstance());
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String activeUser;
         while (true) {
